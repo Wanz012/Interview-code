@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wish Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #a7f3d0, #bfdbfe, #ddd6fe);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #7c3aed;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #5b21b6;
+    }
+    .wish {
+      margin-top: 20px;
+      padding: 15px;
+      background: #f9fafb;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: bold;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .arabic {
+      direction: rtl;
+      text-align: right;
+      font-family: "Scheherazade New", serif;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>🌟 SEMOGA BERJAYA INTERVIEW KERJO 🌟</h2>
+    <input type="text" id="nameInput" placeholder="Enter name" />
+    <button onclick="generateWish()">✨ Get Wish</button>
+    <div id="wishOutput"></div>
+  </div>
+
+  <script>
+    const wishes = [
+      "🌟 Good luck, {name}! May success follow you in your interview and beyond.",
+      "💼 Wishing you confidence and clarity, {name}. You’ve got what it takes!",
+      "✨ Believe in yourself, {name}. This opportunity is just the start of something great.",
+      "🙌 Best of luck, {name}! May your skills and talents shine through.",
+      "🚀 {name}, may your hard work and preparation lead you to success in this interview!",
+      "من جدّ وجد {name}.",
+      "Kipidap Donggibap {name}!"
+    ];
+
+    function generateWish() {
+      const name = document.getElementById("nameInput").value.trim();
+      const output = document.getElementById("wishOutput");
+
+      if (!name) {
+        output.innerHTML = `<div class="wish">Please enter a name 🌸</div>`;
+        return;
+      }
+
+      const randomWish = wishes[Math.floor(Math.random() * wishes.length)];
+      const finalWish = randomWish.replace("{name}", name);
+
+      const isArabic = /[\u0600-\u06FF]/.test(finalWish);
+
+      output.innerHTML = `<div class="wish ${isArabic ? "arabic" : ""}">${finalWish}</div>`;
+    }
+  </script>
+</body>
+</html>
